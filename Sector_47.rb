@@ -1,7 +1,8 @@
-def from str
-  File.expand_path(File.dirname(__FILE__) + str)
-end
-
+#######################################################
+def from str                                         #
+  File.expand_path(File.dirname(__FILE__) + str)     #
+end                                                  #
+######################################################
 require from '/sources/Grass'
 require from '/sources/Human'
 require from '/sources/Tree'
@@ -38,6 +39,7 @@ class Sector_47
   end
 
 end
+#################################################################################################
 
 tst = Sector_47.new
 tst.generation
