@@ -1,20 +1,11 @@
-class Dummy
-  attr_accessor :x, :y
-
-  def initialize (x, y)
-    @x = x
-    @y = y
-  end
+def from str
+  File.expand_path(File.dirname(__FILE__) + str)
 end
 
-class Grass
-  attr_accessor :x, :y
-
-  def initialize (x, y)
-    @x = x
-    @y = y
-  end
-end
+require from '/sources/Grass'
+require from '/sources/Human'
+require from '/sources/Tree'
+require from '/sources/Water'
 
 class Sector_47
 
@@ -35,9 +26,11 @@ class Sector_47
     tst_x = Random.new
     tst_y = Random.new
 
-    plant = Grass.new tst_x.rand(5), tst_y.rand(4)
+    plant = Grass.new tst_x.rand(@weight), tst_y.rand(@height)
+    nikolas = Human.new tst_x.rand(@weight), tst_y.rand(@height)
+    nikolas.walk 3
 
-    puts "X-> #{plant.x} | Y-> #{plant.y}"
+    puts "P X-> #{plant.x} | Y-> #{plant.y}"
   end
 
   def to_s
