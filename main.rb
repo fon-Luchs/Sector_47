@@ -20,17 +20,24 @@ puts "|                                       v 0.0.1                           
 puts "+-------------------------------------------------------------------------------------+"
 
 
+def number_or_nil string
+  num = string.to_i
+  num if num.to_s == string
+end
 
-def dec2bin number
-  number = Integer number
-  if number == 0 then 0 end
 
-  ret_bin = " "
-  while number != 0
-    ret_bin = String number % 2 + ret_bin
-    number = number / 2
+def dec2bin x
+  p = 0
+  two_p = 0
+  output = ""
+
+  while two_p * 2 <= x do
+    two_p = 2 ** p
+    output << ((two_p & x == two_p) ? "1" : "0")
+    p += 1
   end
-  ret_bin
+
+  number_or_nil ( output.reverse )
 end
 
 def encrypt string, key
@@ -46,5 +53,7 @@ def encrypt string, key
 
 
 end
+
+a = dec2bin 10
 
 encrypt "string", "key"
