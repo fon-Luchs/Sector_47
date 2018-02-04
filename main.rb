@@ -26,14 +26,14 @@ def number_or_nil string
 end
 
 
-def dec2bin x
+def dec2bin number
   p = 0
   two_p = 0
   output = ""
 
-  while two_p * 2 <= x do
+  while two_p * 2 <= number do
     two_p = 2 ** p
-    output << ((two_p & x == two_p) ? "1" : "0")
+    output << ((two_p & number == two_p) ? "1" : "0")
     p += 1
   end
 
@@ -50,7 +50,6 @@ def encrypt string, key
 
   sox_out = []
   som_out = []
-
 
 end
 
