@@ -5,14 +5,16 @@
 ##################
 
 class Water
-  def initialize
+  def initialize (h, w)
     rnd = Random.new
     ###############
-    ##  RAND!!!  ##
+    ##  RAND!!!<-##
+    ##   SIZE  <-##
+    ##   COUNT <-##
+    ##   STATE   ##
+    ##   PROPS   ##
     ###############
     @weight = rnd
     @height = rnd
-
-
   end
 end

@@ -6,6 +6,10 @@ end                                                  ##
 #######################################################
 ##  W, T, H                  @x | @y                 ## <----- !!! src/ module
 #######################################################
+##                 UNIQUE COORDINATES <-             ## <----- In order to avoid objects located in objects
+##                        TIME                       ##
+##                       WEATHER                     ##
+#######################################################
 
 require from '/sources/Grass'
 require from '/sources/Human'
