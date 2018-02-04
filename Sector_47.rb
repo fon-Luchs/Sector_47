@@ -1,8 +1,12 @@
+
 #######################################################
-def from str                                         #
-  File.expand_path(File.dirname(__FILE__) + str)     #
-end                                                  #
-######################################################
+def from str                                         ##
+  File.expand_path(File.dirname(__FILE__) + str)     ## <----- !!! src/ module
+end                                                  ##
+#######################################################
+##  W, T, H                  @x | @y                 ## <----- !!! src/ module
+#######################################################
+
 require from '/sources/Grass'
 require from '/sources/Human'
 require from '/sources/Tree'
@@ -29,7 +33,7 @@ class Sector_47
 
     plant = Grass.new tst_x.rand(@weight), tst_y.rand(@height)
     nikolas = Human.new tst_x.rand(@weight), tst_y.rand(@height)
-    nikolas.walk 3
+    nikolas.walk 5
 
     puts "P X-> #{plant.x} | Y-> #{plant.y}"
   end

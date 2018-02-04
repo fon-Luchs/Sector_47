@@ -2,8 +2,8 @@ class Human
   attr_accessor :x, :y
 
   def initialize (x, y)
-    @x = x
-    @y = y
+    @x  = x
+    @y  = y
     @hp = 100
   end
 
