@@ -1,3 +1,8 @@
+#######################################################
+##                                                   ##
+##                 UNIQUE COORDINATES <-             ## <----- In order to avoid objects located in objects
+##                                                   ##
+#######################################################
 
 class Tree
   def initialize (x, y)

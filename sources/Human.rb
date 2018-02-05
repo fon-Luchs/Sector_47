@@ -1,3 +1,16 @@
+#################################
+##                             ##
+##             WATCH <-        ##
+##             NEEDS           ##
+##             SEACH           ##
+##         PROLIGERATION       ##
+##         SAVE SYSTEM         ##
+##            CODING           ##
+##             UNQ             ##
+##                             ##
+#################################
+
+
 class Human
   attr_accessor :x, :y
 
@@ -21,6 +34,10 @@ class Human
 
       puts "H X-> #{@x} | Y-> #{@y}"
     end
+  end
+
+  def watch
+
   end
 
   def isDead?

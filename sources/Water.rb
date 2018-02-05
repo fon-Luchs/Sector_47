@@ -7,14 +7,22 @@
 class Water
   def initialize (h, w)
     rnd = Random.new
+
+    @x = rnd.rand h
+    @y = rnd.rand w
+
     ###############
     ##  RAND!!!<-##
-    ##   SIZE  <-##
-    ##   COUNT <-##
+    ##   SIZE  <-##????
+    ## CORDINATE ##
+    ##   COUNT   ##
     ##   STATE   ##
     ##   PROPS   ##
     ###############
-    @weight = rnd
-    @height = rnd
+
+  end
+
+  def to_s
+    puts "W w->#{@weight} | h->#{@height}"
   end
 end

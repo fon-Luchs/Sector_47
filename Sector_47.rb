@@ -1,12 +1,16 @@
 
 #######################################################
 def from str                                         ##
-  File.expand_path(File.dirname(__FILE__) + str)     ## <----- !!! src/ module
+  File.expand_path(File.dirname(__FILE__) + str)     ## <----- !!! src/conf module
 end                                                  ##
 #######################################################
-##  W, T, H                  @x | @y                 ## <----- !!! src/ module
+##  W, T, H                  @x | @y                 ## <----- !!! src/conf module
 #######################################################
-##                 UNIQUE COORDINATES <-             ## <----- In order to avoid objects located in objects
+##                                                   ##
+##                        WATER       <-             ##
+##                        TREE                       ##
+##                        GRASS                      ##
+##                        HUMAN                      ##
 ##                        TIME                       ##
 ##                       WEATHER                     ##
 #######################################################
@@ -25,7 +29,7 @@ class Sector_47
     @height = h
   end
 
-  def generation
+  def generation #<-------------------------!!!
     lim_x = @weight
     lim_y = @height
 
@@ -38,8 +42,10 @@ class Sector_47
     plant = Grass.new tst_x.rand(@weight), tst_y.rand(@height)
     nikolas = Human.new tst_x.rand(@weight), tst_y.rand(@height)
     nikolas.walk 5
+    water = Water.new @weight, @height
 
     puts "P X-> #{plant.x} | Y-> #{plant.y}"
+    puts water
   end
 
   def to_s
