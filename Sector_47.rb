@@ -8,11 +8,13 @@ end                                                  ##
 #######################################################
 ##                                                   ##
 ##                        WATER       <-             ##
+##                         SCS                       ##
 ##                        TREE                       ##
 ##                        GRASS                      ##
 ##                        HUMAN                      ##
 ##                        TIME                       ##
 ##                       WEATHER                     ##
+##                                                   ##
 #######################################################
 
 require from '/sources/Grass'
@@ -21,38 +23,35 @@ require from '/sources/Tree'
 require from '/sources/Water'
 
 class Sector_47
+  attr_accessor :arr
 
   @@living_entites = 0
 
-  def initialize (w = 5000, h = 5000)
+  def initialize (w = 100, h = 100)
     @weight = w
     @height = h
+    @arr = []
+    (0...@height).each do |l|
+      @arr[l] = []
+      (0...@weight).each do |c|
+        @arr[l] << '0'
+      end
+    end
   end
 
   def generation #<-------------------------!!!
-    lim_x = @weight
-    lim_y = @height
 
-    x = 0
-    y = 0
-
-    tst_x = Random.new
-    tst_y = Random.new
-
-    plant = Grass.new tst_x.rand(@weight), tst_y.rand(@height)
-    nikolas = Human.new tst_x.rand(@weight), tst_y.rand(@height)
-    nikolas.walk 5
-    water = Water.new @weight, @height
-
-    puts "P X-> #{plant.x} | Y-> #{plant.y}"
-    puts water
   end
 
   def to_s
     puts "ZONE-> #{@weight} #{@height}\nLiving_entites->#{@@living_entites}\n"
+    for i in 0...@arr.size
+      puts"#{@arr[i]}"
+    end
   end
 
 end
+
 #################################################################################################
 
 tst = Sector_47.new

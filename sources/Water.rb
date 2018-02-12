@@ -10,7 +10,8 @@ class Water
 
     @x = rnd.rand h
     @y = rnd.rand w
-
+    @height = rnd.rand h / 8
+    @weight = rnd.rand w / 8
     ###############
     ##  RAND!!!<-##
     ##   SIZE  <-##????
@@ -23,6 +24,6 @@ class Water
   end
 
   def to_s
-    puts "W w->#{@weight} | h->#{@height}"
+    puts "W x-> #{@x} | y-> #{@y} | w-> #{@weight} | h-> #{@height}"
   end
 end
