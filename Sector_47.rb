@@ -27,7 +27,7 @@ class Sector_47
 
   @@living_entites = 0
 
-  def initialize (w = 100, h = 100)
+  def initialize (w = 10, h = 10)
     @weight = w
     @height = h
     @arr = []
@@ -40,7 +40,8 @@ class Sector_47
   end
 
   def generation #<-------------------------!!!
-
+    leon = Human.new 4, 4, 'Rasarax'
+    @arr[leon.x][leon.y] = leon.id_number
   end
 
   def to_s

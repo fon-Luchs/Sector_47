@@ -12,12 +12,14 @@
 
 
 class Human
-  attr_accessor :x, :y
+  attr_accessor :x, :y, :id_number
 
-  def initialize (x, y)
+  def initialize (x, y, name, gender = 'X')
     @x  = x
     @y  = y
     @hp = 100
+    @id_number = 'H'
+    @gender = gender
   end
 
   def walk step
