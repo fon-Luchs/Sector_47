@@ -39,9 +39,11 @@ class Sector_47
     end
   end
 
-  def generation #<-------------------------!!!
+  def generation #<-------------------------
     leon = Human.new 4, 4, 'Rasarax'
-    @arr[leon.x][leon.y] = leon.id_number
+    @arr[leon.x][leon.y] = leon.id_char
+    grass = Grass.new 5, 5
+    @arr[grass.x][grass.y] = grass.id_char
   end
 
   def to_s

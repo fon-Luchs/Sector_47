@@ -12,17 +12,18 @@
 
 
 class Human
-  attr_accessor :x, :y, :id_number
+  attr_accessor :x, :y, :id_char, :gender, :name
 
   def initialize (x, y, name, gender = 'X')
     @x  = x
     @y  = y
+    @name = name
     @hp = 100
-    @id_number = 'H'
-    @gender = gender
+    @id_char = 'H'
+    @gender  = gender
   end
 
-  def walk step
+  def walk step #<------- In main class
     rnd = Random.new
     for i in 1..step
       symbol = rnd.rand 2
@@ -34,7 +35,7 @@ class Human
         dice == 1 ? @x -= 1 : @y -= 1
       end
 
-      puts "H X-> #{@x} | Y-> #{@y}"
+      puts "#{@id_number} NAME-> #{@name} GENDER-> #{@gender}\n LOCALE-> X-> #{@x} | Y-> #{@y}"
     end
   end
 
