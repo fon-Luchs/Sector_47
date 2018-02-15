@@ -8,6 +8,7 @@ class Tree
   def initialize (x, y)
     @x = x
     @y = y
+    @id_char = 'T'
   end
 
   def to_s

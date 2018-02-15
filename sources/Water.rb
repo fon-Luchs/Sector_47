@@ -6,9 +6,29 @@
 
 class Water
   def initialize (x, y)
+
     @x = x
     @y = y
+    @id_char = 'W'
+
+    ################
+    ##  RAND!!! <-##
+    ##   SIZE   <-##????
+    ## CORDINATE<-##
+    ##   COUNT    ##
+    ##   STATE    ##
+    ##   PROPS    ##
+    ################
+
+  end
+
+  def to_s
+    puts "W x-> #{@x} | y-> #{@y} | w-> #{@weight} | h-> #{@height}"
+  end
+end
+
 =begin
+------------------------------------
     rnd = Random.new
     symbol = rnd.rand 2
     if symbol == 1
@@ -17,19 +37,42 @@ class Water
     else
       dice = rnd.rand 2
       dice == 1 ? @x -= 1 : @y -= 1
+------------------------------------
+    loop do
+      for i_x in 1...run
+        if run % 2 == 0
+          num += 1
+          arr[x -= 1][y] = num
+        else
+          num += 1
+          arr[x += 1][y] = num
+        end
+      end
+
+      for i_y in 1...run
+        if run % 2 == 0
+          num += 1
+          arr[x][y -= 1] = num
+        else
+          num += 1
+          arr[x][y += 1] = num
+        end
+
+      end
+
+      run += 1
+
+    if run == arr.size + 1
+      for i in 1...arr.size
+        num += 1
+        if size % 2 == 0
+          arr[x += 1][y] = num
+        else
+          arr[x -= 1][y] = num
+        end
+      end
+      break
+    end
+  end
+------------------------------------
 =end
-    ###############
-    ##  RAND!!!<-##
-    ##   SIZE  <-##????
-    ## CORDINATE ##
-    ##   COUNT   ##
-    ##   STATE   ##
-    ##   PROPS   ##
-    ###############
-
-  end
-
-  def to_s
-    puts "W x-> #{@x} | y-> #{@y} | w-> #{@weight} | h-> #{@height}"
-  end
-end
