@@ -5,13 +5,19 @@
 ##################
 
 class Water
-  def initialize (h, w)
+  def initialize (x, y)
+    @x = x
+    @y = y
+=begin
     rnd = Random.new
-
-    @x = rnd.rand h
-    @y = rnd.rand w
-    @height = rnd.rand h / 8
-    @weight = rnd.rand w / 8
+    symbol = rnd.rand 2
+    if symbol == 1
+      dice = rnd.rand 2
+      dice == 1 ? @x += 1 : @y += 1
+    else
+      dice = rnd.rand 2
+      dice == 1 ? @x -= 1 : @y -= 1
+=end
     ###############
     ##  RAND!!!<-##
     ##   SIZE  <-##????

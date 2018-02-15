@@ -46,6 +46,14 @@ class Sector_47
     @arr[grass.x][grass.y] = grass.id_char
   end
 
+  def walk object, step #<------------------------
+    for i in 0...step
+      @arr[object.x][object.y] = '0'
+      object.step
+      @arr[object.x][object.y] = object.id_char
+    end
+  end
+
   def to_s
     puts "ZONE-> #{@weight} #{@height}\nLiving_entites->#{@@living_entites}\n"
     for i in 0...@arr.size
@@ -64,13 +72,13 @@ puts tst
 spinner = Enumerator.new do |e|
   loop do
     for i in (0...10)
-      e.yield "#{i}"
+      e.yield '#'
     end
   end
 end
 
 1.upto(10) do |i|
-  printf("\rProcess: %s", spinner.next)
+  printf("\r%s", spinner.next)
   sleep(0.3)
   printf " ->DONE"
 end

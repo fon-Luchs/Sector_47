@@ -23,18 +23,15 @@ class Human
     @gender  = gender
   end
 
-  def walk step #<------- In main class
+  def walk #<------- In main class
     rnd = Random.new
-    for i in 1..step
-      symbol = rnd.rand 2
-      if symbol == 1
-        dice = rnd.rand 2
-        dice == 1 ? @x += 1 : @y += 1
-      else
-        dice = rnd.rand 2
-        dice == 1 ? @x -= 1 : @y -= 1
-      end
-
+    symbol = rnd.rand 2
+    if symbol == 1
+      dice = rnd.rand 2
+      dice == 1 ? @x += 1 : @y += 1
+    else
+      dice = rnd.rand 2
+      dice == 1 ? @x -= 1 : @y -= 1
       puts "#{@id_number} NAME-> #{@name} GENDER-> #{@gender}\n LOCALE-> X-> #{@x} | Y-> #{@y}"
     end
   end
