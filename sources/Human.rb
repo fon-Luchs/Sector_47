@@ -34,6 +34,8 @@ class Human
       dice == 1 ? @x -= 1 : @y -= 1
       puts "#{@id_number} NAME-> #{@name} GENDER-> #{@gender}\n LOCALE-> X-> #{@x} | Y-> #{@y}"
     end
+
+    puts "#{@id_number} NAME-> #{@name} GENDER-> #{@gender}\n LOCALE-> X-> #{@x} | Y-> #{@y}"
   end
 
   def watch

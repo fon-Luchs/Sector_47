@@ -5,5 +5,6 @@ class Grass
     @x = x
     @y = y
     @id_char = 'G'
+    @state = 100
   end
 end

@@ -9,6 +9,7 @@ class Tree
     @x = x
     @y = y
     @id_char = 'T'
+    @state = 100
   end
 
   def to_s
