@@ -1,9 +1,11 @@
 class Grass
-  attr_accessor :x, :y, :id_char
+  attr_accessor :id_char
 
-  def initialize (x, y)
+  def initialize ()
+=begin
     @x = x
     @y = y
+=end
     @id_char = 'G'
     @state = 100
   end

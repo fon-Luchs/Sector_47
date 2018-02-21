@@ -1,29 +1,16 @@
-##################
-## River? Lake? ##
-## Water % lim  ##
-##         n->∞ ##
-##################
-
 class Water
-  def initialize (x, y)
+  attr_accessor :id_char
 
-    @x = x
-    @y = y
+  def initialize ()
+=begin
+    @x = x #
+    @y = y #
+=end
     @id_char = 'W'
-
-    ################
-    ##  RAND!!! <-##
-    ##   SIZE   <-##????
-    ## CORDINATE<-##
-    ##   COUNT    ##
-    ##   STATE    ##
-    ##   PROPS    ##
-    ################
-
   end
 
   def to_s
-    puts "W x-> #{@x} | y-> #{@y} | w-> #{@weight} | h-> #{@height}"
+    puts "#{@id_char}"
   end
 end
 
