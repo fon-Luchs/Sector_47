@@ -86,9 +86,6 @@ end
 
 #################################################################################################
 
-tst = Sector_47.new
-tst.generation
-puts tst
 #--------------------------------#|
 spinner = Enumerator.new do |e|  #|
   loop do                        #|
@@ -101,6 +98,6 @@ end                              #|---->>>> add Sector 47 to_s
 1.upto(10) do |i|                #|
   printf("\r%s", spinner.next)   #|
   sleep(0.3)              #|
-  printf " ->DONE"               #|
+  printf " ->DONE \n"            #|
 end                              #|
 #--------------------------------#|
