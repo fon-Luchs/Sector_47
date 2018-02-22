@@ -45,20 +45,22 @@ class Sector_47
     water_size < 10 ? water_size += 10 : water_size
     water = Water.new
     for i in 0..water_size
-      @arr[ Random.rand(@arr.size) ][ Random.rand(@arr[1].size) ] = water.id_char
+      @arr[ Random.rand(@arr.size) ][ Random.rand(@arr[1].size) ] = water
     end
+
     grass = Grass.new
     for y in 0...@arr.size
       for x in 0...@arr[1].size
-        if @arr[x][y] != water.id_char
-          @arr[x][y] = grass.id_char
+        if @arr[x][y] != water
+          @arr[x][y] = grass
+          @@living_entites += 1 #<<<<<<<<<<
         end
       end
     end
 
     leon = Human.new 4, 4, 'Rasarax'
-    @arr[leon.x][leon.y] = leon.id_char
-
+    @arr[leon.x][leon.y] = leon
+    @@living_entites += 1       #<<<<<<<<<<
 
   end
 
@@ -72,8 +74,11 @@ class Sector_47
 
   def to_s
     puts "ZONE-> #{@weight} #{@height}\nLiving_entites->#{@@living_entites}\n"
-    for i in 0...@arr.size
-      puts"#{@arr[i]}"
+    for y in 0...@arr.size
+      for x in 0...@arr[1].size
+        print" #{@arr[x][y].id_char} "
+      end
+      puts " "
     end
   end
 
@@ -84,17 +89,18 @@ end
 tst = Sector_47.new
 tst.generation
 puts tst
-
-spinner = Enumerator.new do |e|
-  loop do
-    for i in (0...10)
-      e.yield '#'
-    end
-  end
-end
-
-1.upto(10) do |i|
-  printf("\r%s", spinner.next)
-  sleep(0.3)
-  printf " ->DONE"
-end
+#--------------------------------#|
+spinner = Enumerator.new do |e|  #|
+  loop do                        #|
+    for i in (0...10)            #|
+      e.yield '#'                #|
+    end                          #|
+  end                            #|
+end                              #|---->>>> add Sector 47 to_s
+                                 #|
+1.upto(10) do |i|                #|
+  printf("\r%s", spinner.next)   #|
+  sleep(0.3)              #|
+  printf " ->DONE"               #|
+end                              #|
+#--------------------------------#|
