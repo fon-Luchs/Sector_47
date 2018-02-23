@@ -26,6 +26,7 @@ class Sector_47
   attr_accessor :arr
 
   @@living_entites = 0
+  @@water_chunks   = 0
 
   def initialize (w = 10, h = 10)
     @weight = w
@@ -46,6 +47,7 @@ class Sector_47
     water = Water.new
     for i in 0..water_size
       @arr[ Random.rand(@arr.size) ][ Random.rand(@arr[1].size) ] = water
+      @@water_chunks += 1
     end
 
     grass = Grass.new
@@ -58,8 +60,8 @@ class Sector_47
       end
     end
 
-    leon = Human.new 4, 4, 'Rasarax'
-    @arr[leon.x][leon.y] = leon
+    leon = Human.new( Random.rand(10), Random.rand(10),"Leon")    #| fix
+    @arr[leon.x][leon.y] = leon                                        #|
     @@living_entites += 1       #<<<<<<<<<<
 
   end
@@ -73,13 +75,16 @@ class Sector_47
   end
 
   def to_s
-    puts "ZONE-> #{@weight} #{@height}\nLiving_entites->#{@@living_entites}\n"
+    puts "ZONE-> #{@weight} #{@height}\nLiving_entites->#{@@living_entites}\nWater chunks-> #{@@water_chunks}\n"
+    print '+';  (0...@arr.size * 2).each{ print "-" }; puts ' +'
     for y in 0...@arr.size
+      print '|'
       for x in 0...@arr[1].size
-        print" #{@arr[x][y].id_char} "
+        print" #{@arr[x][y].id_char}"
       end
-      puts " "
+      puts ' |'
     end
+    print '+';  (0...@arr.size * 2).each{ print "-" }; puts ' +'
   end
 
 end
@@ -90,14 +95,18 @@ end
 spinner = Enumerator.new do |e|  #|
   loop do                        #|
     for i in (0...10)            #|
-      e.yield '#'                #|
+      e.yield '|'                #|
+      e.yield '/'                #|
+      e.yield '-'                #|
+      e.yield '\\'               #|
     end                          #|
   end                            #|
 end                              #|---->>>> add Sector 47 to_s
                                  #|
-1.upto(10) do |i|                #|
+1.upto(19) do |i|                #|
   printf("\r%s", spinner.next)   #|
   sleep(0.3)              #|
-  printf " ->DONE \n"            #|
+  printf ">DONE"                 #|
 end                              #|
 #--------------------------------#|
+ puts " "

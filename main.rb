@@ -18,13 +18,13 @@ puts "|                                |____   |     /   /                      
 puts "|                                    |   |    /   /                                   |"
 puts "|                                    |___|   /___/                                    |"
 puts "|                                      is life?                                       |"
-puts "|                                       v 0.0.1                                       |"
+puts "|                                       v 0.1                                         |"
 puts "+-------------------------------------------------------------------------------------+"
 
-tst = Sector_47.new
+tst = Sector_47.new 42, 42
 tst.generation
 puts tst
-
+########################################################################
 def number_or_nil string
   num = string.to_i
   num if num.to_s == string
@@ -61,3 +61,4 @@ end
 a = dec2bin 10
 
 encrypt "string", "key"
+##########################################################################
