@@ -21,8 +21,11 @@ puts "|                                      is life?                           
 puts "|                                       v 0.1                                         |"
 puts "+-------------------------------------------------------------------------------------+"
 
-tst = Sector_47.new 42, 42
-tst.generation
+tst = Sector_47.new 10, 10
+leon = tst.generation #<<<<<<<<<<<
+puts tst
+puts leon.get_coordinate
+tst.walk leon, 4  #<<<<<<<<<<
 puts tst
 ########################################################################
 def number_or_nil string

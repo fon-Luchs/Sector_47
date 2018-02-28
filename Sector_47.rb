@@ -40,7 +40,7 @@ class Sector_47
     end
   end
 
-  def generation
+  def generation #<<<<<<<<<<<<<< ...
 
     water_size = Random.rand( (@arr.size * @arr[1].size) / 2 )
     water_size < 10 ? water_size += 10 : water_size
@@ -59,16 +59,17 @@ class Sector_47
         end
       end
     end
-
+    
     leon = Human.new( Random.rand(10), Random.rand(10),"Leon")    #| fix
     @arr[leon.x][leon.y] = leon                                        #|
     @@living_entites += 1       #<<<<<<<<<<
 
+    leon
   end
 
   def walk object, step #<------------------------ !!!
     for i in 0...step
-      @arr[object.x][object.y] = '0'
+      @arr[object.x][object.y] = '0' #<--------------a,b = b,a
       object.step
       @arr[object.x][object.y] = object.id_char
     end
