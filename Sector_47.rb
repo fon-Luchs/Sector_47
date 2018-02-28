@@ -50,6 +50,8 @@ class Sector_47
       @@water_chunks += 1
     end
 
+    # GENER TREE
+
     grass = Grass.new
     for y in 0...@arr.size
       for x in 0...@arr[1].size
@@ -64,11 +66,21 @@ class Sector_47
     @arr[leon.x][leon.y] = leon                                        #|
     @@living_entites += 1       #<<<<<<<<<<
 
+    # GENER FAMEL
+    # GENER ANIMAL (MALE/FAMEL) [CARNIVORES]
+    # GENER ANIMAL (MALE/FAMEL) [HERBIVORES]
+
     leon
   end
 
   def walk object, step #<------------------------ !!!
     for i in 0...step
+
+      # entry point -> @arr[object.x][object.y] = Random object
+      # object.step                       |
+      # var a = @arr[objext.x][objext.y]  | <-each
+      # @arr[objext.x][objext.y] = object |
+
       @arr[object.x][object.y] = '0' #<--------------a,b = b,a
       object.step
       @arr[object.x][object.y] = object.id_char
