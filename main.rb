@@ -18,14 +18,15 @@ puts "|                                |____   |     /   /                      
 puts "|                                    |   |    /   /                                   |"
 puts "|                                    |___|   /___/                                    |"
 puts "|                                      is life?                                       |"
-puts "|                                       v 0.2                                         |"
+puts "|                                       v 0.2.1                                         |"
 puts "+-------------------------------------------------------------------------------------+"
 
 tst = Sector_47.new 10, 10
 leon = tst.generation #<<<<<<<<<<<
 puts tst
-tst.walk leon, 2  #<<<<<<<<<<
+tst.walk leon, 99
 puts tst
+
 ########################################################################
 def number_or_nil string
   num = string.to_i

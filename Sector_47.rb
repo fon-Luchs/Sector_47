@@ -77,7 +77,7 @@ class Sector_47
 
       entry_point = { "x" => object.x, "y" => object.y }
       object.step
-      entry_object = {"o" => @arr[object.x][object.y], "x" => object.x, "y" => object.y}
+      entry_object = {"o" => @arr[object.x][object.y], "x" => object.x, "y" => object.y}#<<< BUG
 
       dice = Random.rand(2) #<-------------- Add Tree
       dice == 1 ? random_object = Water.new : random_object = Grass.new
@@ -87,9 +87,9 @@ class Sector_47
       (0...step - 1).each {
         object.step
         @arr[ entry_object["x"] ][ entry_object["y"] ] = entry_object["o"]
-        entry_object["o"] = @arr[object.x][object.y] #
-        entry_object["x"] = object.x                 # fix
-        entry_object["y"] = object.y                 #
+        entry_object["x"] = object.x
+        entry_object["y"] = object.y
+        entry_object["o"] = @arr[ entry_object["x"] ][ entry_object["y"] ] #
         @arr[object.x][object.y] = object
       }
   end
@@ -130,3 +130,5 @@ end                              #|---->>>> add Sector 47 to_s
 end                              #|
 #--------------------------------#|
  puts " "
+
+
