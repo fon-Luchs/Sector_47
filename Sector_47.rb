@@ -74,17 +74,24 @@ class Sector_47
   end
 
   def walk object, step #<------------------------ !!!
-    for i in 0...step
 
-      # entry point -> @arr[object.x][object.y] = Random object
-      # object.step                       |
-      # var a = @arr[objext.x][objext.y]  | <-each
-      # @arr[objext.x][objext.y] = object |
-
-      @arr[object.x][object.y] = '0' #<--------------a,b = b,a
+      entry_point = { "x" => object.x, "y" => object.y }
       object.step
-      @arr[object.x][object.y] = object.id_char
-    end
+      entry_object = {"o" => @arr[object.x][object.y], "x" => object.x, "y" => object.y}
+
+      dice = Random.rand(2) #<-------------- Add Tree
+      dice == 1 ? random_object = Water.new : random_object = Grass.new
+      @arr[object.x][object.y] = object
+      @arr[ entry_point["x"] ][ entry_point["y"] ] = random_object
+
+      (0...step - 1).each {
+        object.step
+        @arr[ entry_object["x"] ][ entry_object["y"] ] = entry_object["o"]
+        entry_object["o"] = @arr[object.x][object.y] #
+        entry_object["x"] = object.x                 # fix
+        entry_object["y"] = object.y                 #
+        @arr[object.x][object.y] = object
+      }
   end
 
   def to_s

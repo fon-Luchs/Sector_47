@@ -25,16 +25,14 @@ class Human
 
   def step #<------- In main class
     rnd = Random.new
-    symbol = rnd.rand 2
-    if symbol == 1
-      dice = rnd.rand 2
-      dice == 1 ? @x += 1 : @y += 1
-    else
+    symbol = rnd.rand 2                  #
+    if symbol == 1                       #
+      dice = rnd.rand 2                  # <--- Add limits
+      dice == 1 ? @x += 1 : @y += 1      #
+    else                                 #
       dice = rnd.rand 2
       dice == 1 ? @x -= 1 : @y -= 1
-      puts "#{@id_number} NAME-> #{@name} GENDER-> #{@gender}\n LOCALE-> X-> #{@x} | Y-> #{@y}"
     end
-    puts "#{@id_number} NAME-> #{@name} GENDER-> #{@gender}\n LOCALE-> X-> #{@x} | Y-> #{@y}"
   end
 
   def watch
