@@ -1,6 +1,6 @@
-                ###   module ??? ###
+                  ###   module ??? ###
 #######################################################
-def from str                                         ##
+def from (str)                                         ##
   File.expand_path(File.dirname(__FILE__) + str)     ## <----- !!! src/conf module
 end                                                  ##
 #######################################################
@@ -21,12 +21,14 @@ require from '/sources/Grass'
 require from '/sources/Human'
 require from '/sources/Tree'
 require from '/sources/Water'
+require from '/sources/modules/Core_module'
+require from '/sources/modules/Basic_module'
 
 class Sector_47
-  attr_accessor :arr
+  include Core
+  include Basic
 
-  @@living_entites = 0
-  @@water_chunks   = 0
+  attr_accessor :arr
 
   def initialize (w = 10, h = 10)
     @weight = w
@@ -35,36 +37,38 @@ class Sector_47
     (0...@height).each do |l|
       @arr[l] = []
       (0...@weight).each do |c|
-        @arr[l] << '0'
+        @arr[l][c] = []
+        (0...1).each do |j|
+          @arr[l][c] << '0'     #<<<< Dirt class
+        end
       end
+    end
+    (0...@height).each do |l|
+      puts "#{@arr[l]}"
     end
   end
 
   def generation #<<<<<<<<<<<<<< ...
 
-    water_size = Random.rand( (@arr.size * @arr[1].size) / 2 )
-    water_size < 10 ? water_size += 10 : water_size
     water = Water.new
-    for i in 0..water_size
-      @arr[ Random.rand(@arr.size) ][ Random.rand(@arr[1].size) ] = water
-      @@water_chunks += 1
-    end
+    water_size = Core.water_size @arr.size
+    puts "#{water_size}"
+    (0...water_size).each {@arr[ Random.rand(@arr.size) ][ Random.rand(@arr[1].size) ][0] = water}
 
     # GENER TREE
 
     grass = Grass.new
     for y in 0...@arr.size
       for x in 0...@arr[1].size
-        if @arr[x][y] != water
-          @arr[x][y] = grass
-          @@living_entites += 1 #<<<<<<<<<<
+        if @arr[x][y][0] != water
+          @arr[x][y][0] = grass
         end
       end
     end
-    
-    leon = Human.new( Random.rand(10), Random.rand(10),"Leon")    #| fix
-    @arr[leon.x][leon.y] = leon                                        #|
-    @@living_entites += 1       #<<<<<<<<<<
+
+    leon = Human.new( Random.rand(@arr.size), Random.rand(@arr[1].size),"Leon") #<<<< Weight & Height
+    #| fix
+    #@arr[leon.x][leon.y][1] = leon <<< BUG
 
     # GENER FAMEL
     # GENER ANIMAL (MALE/FAMEL) [CARNIVORES]
@@ -74,7 +78,7 @@ class Sector_47
   end
 
   def walk object, step #<------------------------ !!!
-
+=begin
       entry_point = { "x" => object.x, "y" => object.y }
       object.step
       entry_object = {"o" => @arr[object.x][object.y], "x" => object.x, "y" => object.y}#<<< BUG
@@ -92,19 +96,16 @@ class Sector_47
         entry_object["o"] = @arr[ entry_object["x"] ][ entry_object["y"] ] #
         @arr[object.x][object.y] = object
       }
+=end
   end
 
   def to_s
-    puts "ZONE-> #{@weight} #{@height}\nLiving_entites->#{@@living_entites}\nWater chunks-> #{@@water_chunks}\n"
-    print '+';  (0...@arr.size * 2).each{ print "-" }; puts ' +'
-    for y in 0...@arr.size
-      print '|'
-      for x in 0...@arr[1].size
-        print" #{@arr[x][y].id_char}"
+      (0...@arr.size).each do |y|
+        (0...@arr.size).each do |x|
+          print " #{@arr[x][y][0].id_char}"
+        end
+        puts " "
       end
-      puts ' |'
-    end
-    print '+';  (0...@arr.size * 2).each{ print "-" }; puts ' +'
   end
 
 end
@@ -131,4 +132,6 @@ end                              #|
 #--------------------------------#|
  puts " "
 
-
+tst = Sector_47.new 4, 4
+tst.generation
+puts tst

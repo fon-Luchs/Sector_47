@@ -15,8 +15,8 @@ class Human
   attr_accessor :x, :y, :id_char, :gender, :name
 
   def initialize (x, y, name, gender = 'X')
-    @x  = x
-    @y  = y
+    @__x  = x
+    @__y  = y
     @name = name
     @hp = 100
     @id_char = 'H'
@@ -28,10 +28,10 @@ class Human
     symbol = rnd.rand 2
     if symbol == 1
       dice = rnd.rand 2
-      dice == 1 ? @x += 1 : @y += 1
+      dice == 1 ? @__x += 1 : @__y += 1
     else
       dice = rnd.rand 2
-      dice == 1 ? @x -= 1 : @y -= 1
+      dice == 1 ? @__x -= 1 : @__y -= 1
     end
   end
 
@@ -40,10 +40,10 @@ class Human
   end
 
   def get_coordinate
-    puts "|> #{@x + 1} <|> #{@y + 1} <|" #<<<<<<<<<<????????????
+    puts "|> #{@__x + 1} <|> #{@__y + 1} <|" #<<<<<<<<<<????????????
   end
 
-  def isDead?
+  def is_dead?
     @hp == 0 ? true : false
   end
 
