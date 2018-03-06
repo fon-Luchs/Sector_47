@@ -67,9 +67,7 @@ class Sector_47
     end
 
     leon = Human.new( Random.rand(@arr.size), Random.rand(@arr[1].size),"Leon") #<<<< Weight & Height
-    #| fix
-    #@arr[leon.x][leon.y][1] = leon <<< BUG
-
+    @arr[leon.__x][leon.__y][1] = leon
     # GENER FAMEL
     # GENER ANIMAL (MALE/FAMEL) [CARNIVORES]
     # GENER ANIMAL (MALE/FAMEL) [HERBIVORES]
@@ -102,10 +100,22 @@ class Sector_47
   def to_s
       (0...@arr.size).each do |y|
         (0...@arr.size).each do |x|
+          if @arr[x][y][1].nil? === false
+            print " #{@arr[x][y][1].id_char}"
+            next
+          end
           print " #{@arr[x][y][0].id_char}"
         end
         puts " "
       end
+      puts "---------"
+      (0...@arr.size).each do |y|
+        (0...@arr.size).each do |x|
+          print " #{@arr[x][y][0].id_char}"
+        end
+        puts " "
+      end
+
   end
 
 end

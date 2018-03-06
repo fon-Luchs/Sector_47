@@ -12,7 +12,7 @@
 
 
 class Human
-  attr_accessor :x, :y, :id_char, :gender, :name
+  attr_accessor :__x, :__y, :id_char, :gender, :name
 
   def initialize (x, y, name, gender = 'X')
     @__x  = x
