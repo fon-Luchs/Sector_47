@@ -76,6 +76,20 @@ class Sector_47
   end
 
   def walk object, step #<------------------------ !!!
+
+  (1..step).each{
+    puts "#{object.get_coordinate}"
+    #@arr[object.__x][object.__y][1] = nil
+    object.step
+    object.__x > @arr.size - 1 ? object.__x= @arr.size : object.__x
+    object.__y > @arr.size - 1 ? object.__y= @arr.size : object.__y
+    object.__x < 0 ? object.__x= 1 : object.__x
+    object.__y < 0 ? object.__y= 1 : object.__y
+    @arr[object.__x][object.__y][1] = object
+
+
+  }
+
 =begin
       entry_point = { "x" => object.x, "y" => object.y }
       object.step
@@ -143,5 +157,6 @@ end                              #|
  puts " "
 
 tst = Sector_47.new 4, 4
-tst.generation
+leon = tst.generation
+tst.walk leon, 10
 puts tst

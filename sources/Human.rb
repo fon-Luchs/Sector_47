@@ -1,16 +1,3 @@
-#################################
-##                             ##
-##             WATCH <-        ##
-##             NEEDS           ##
-##             SEACH           ##
-##         PROLIGERATION       ##
-##         SAVE SYSTEM         ##
-##            CODING           ##
-##             UNQ             ##
-##                             ##
-#################################
-
-
 class Human
   attr_accessor :__x, :__y, :id_char, :gender, :name
 
@@ -31,7 +18,7 @@ class Human
       dice == 1 ? @__x += 1 : @__y += 1
     else
       dice = rnd.rand 2
-      dice == 1 ? @__x -= 1 : @__y -= 1
+      dice == 1 ? @__x -= 1 : @__y -= 1 if (@__x && @__y) > 0
     end
   end
 
@@ -40,7 +27,7 @@ class Human
   end
 
   def get_coordinate
-    puts "|> #{@__x + 1} <|> #{@__y + 1} <|" #<<<<<<<<<<????????????
+    puts "|> #{@__x} <|> #{@__y } <|" #<<<<<<<<<<????????????
   end
 
   def is_dead?
