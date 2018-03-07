@@ -1,162 +1,49 @@
-                  ###   module ??? ###
-#######################################################
-def from (str)                                         ##
-  File.expand_path(File.dirname(__FILE__) + str)     ## <----- !!! src/conf module
-end                                                  ##
-#######################################################
-##  W, T, H                  @x | @y                 ## <----- !!! src/conf module
-#######################################################
-##                                                   ##
-##                        WATER       <-100%         ##
-##                         SCS        <-100%         ## <----- Refactor (change push logic)
-##                        TREE                       ##
-##                        GRASS       <-100%         ##
-##                        HUMAN                      ##
-##                        TIME                       ##
-##                       WEATHER                     ##
-##                                                   ##
-#######################################################
+require_relative "./sources/Animal"
+require_relative "./sources/Grass"
+require_relative "./sources/Human"
+require_relative "./sources/Tree"
+require_relative "./sources/Water"
+require_relative "./sources/Dirt"
+require_relative "./sources/Empty"
 
-require from '/sources/Grass'
-require from '/sources/Human'
-require from '/sources/Tree'
-require from '/sources/Water'
-require from '/sources/modules/Core_module'
-require from '/sources/modules/Basic_module'
+require_relative "./sources/modules/Basic_module"
+require_relative "./sources/modules/Core_module"
 
 class Sector_47
-  include Core
   include Basic
+  include Core
 
-  attr_accessor :arr
-
-  def initialize (w = 10, h = 10)
-    @weight = w
-    @height = h
+  def initialize (width:, length:)
+    @_w = width
+    @_l = length
     @arr = []
-    (0...@height).each do |l|
+
+    dirt = Dirt.new
+    empty = Empty_Space.new
+
+    (0...@_l).each do |l|
       @arr[l] = []
-      (0...@weight).each do |c|
+      (0...@_w).each do |c|
         @arr[l][c] = []
-        (0...1).each do |j|
-          @arr[l][c] << '0'     #<<<< Dirt class
-        end
+        (0...1).each {
+          @arr[l][c] << dirt
+        }
+        (1..2).each {
+          @arr[l][c] << empty
+        }
       end
     end
-    (0...@height).each do |l|
-      puts "#{@arr[l]}"
-    end
-  end
-
-  def generation #<<<<<<<<<<<<<< ...
-
-    water = Water.new
-    water_size = Core.water_size @arr.size
-    puts "#{water_size}"
-    (0...water_size).each {@arr[ Random.rand(@arr.size) ][ Random.rand(@arr[1].size) ][0] = water}
-
-    # GENER TREE
-
-    grass = Grass.new
-    for y in 0...@arr.size
-      for x in 0...@arr[1].size
-        if @arr[x][y][0] != water
-          @arr[x][y][0] = grass
-        end
-      end
-    end
-
-    leon = Human.new( Random.rand(@arr.size), Random.rand(@arr[1].size),"Leon") #<<<< Weight & Height
-    @arr[leon.__x][leon.__y][1] = leon
-    # GENER FAMEL
-    # GENER ANIMAL (MALE/FAMEL) [CARNIVORES]
-    # GENER ANIMAL (MALE/FAMEL) [HERBIVORES]
-
-    leon
-  end
-
-  def walk object, step #<------------------------ !!!
-
-  (1..step).each{
-    puts "#{object.get_coordinate}"
-    #@arr[object.__x][object.__y][1] = nil
-    object.step
-    object.__x > @arr.size - 1 ? object.__x= @arr.size : object.__x
-    object.__y > @arr.size - 1 ? object.__y= @arr.size : object.__y
-    object.__x < 0 ? object.__x= 1 : object.__x
-    object.__y < 0 ? object.__y= 1 : object.__y
-    @arr[object.__x][object.__y][1] = object
-
-
-  }
-
-=begin
-      entry_point = { "x" => object.x, "y" => object.y }
-      object.step
-      entry_object = {"o" => @arr[object.x][object.y], "x" => object.x, "y" => object.y}#<<< BUG
-
-      dice = Random.rand(2) #<-------------- Add Tree
-      dice == 1 ? random_object = Water.new : random_object = Grass.new
-      @arr[object.x][object.y] = object
-      @arr[ entry_point["x"] ][ entry_point["y"] ] = random_object
-
-      (0...step - 1).each {
-        object.step
-        @arr[ entry_object["x"] ][ entry_object["y"] ] = entry_object["o"]
-        entry_object["x"] = object.x
-        entry_object["y"] = object.y
-        entry_object["o"] = @arr[ entry_object["x"] ][ entry_object["y"] ] #
-        @arr[object.x][object.y] = object
-      }
-=end
   end
 
   def to_s
-      (0...@arr.size).each do |y|
-        (0...@arr.size).each do |x|
-          if @arr[x][y][1].nil? === false
-            print " #{@arr[x][y][1].id_char}"
-            next
-          end
+    (0...@arr.size).each do |y|
+        (0...@arr[1].size).each do |x|
           print " #{@arr[x][y][0].id_char}"
         end
-        puts " "
-      end
-      puts "---------"
-      (0...@arr.size).each do |y|
-        (0...@arr.size).each do |x|
-          print " #{@arr[x][y][0].id_char}"
-        end
-        puts " "
-      end
-
+      puts " "
+    end
+    puts ">>#{@arr[1][1][1].id_char}"
   end
 
 end
 
-#################################################################################################
-
-#--------------------------------#|
-spinner = Enumerator.new do |e|  #|
-  loop do                        #|
-    for i in (0...10)            #|
-      e.yield '|'                #|
-      e.yield '/'                #|
-      e.yield '-'                #|
-      e.yield '\\'               #|
-    end                          #|
-  end                            #|
-end                              #|---->>>> add Sector 47 to_s
-                                 #|
-1.upto(19) do |i|                #|
-  printf("\r%s", spinner.next)   #|
-  sleep(0.3)              #|
-  printf ">DONE"                 #|
-end                              #|
-#--------------------------------#|
- puts " "
-
-tst = Sector_47.new 4, 4
-leon = tst.generation
-tst.walk leon, 10
-puts tst
