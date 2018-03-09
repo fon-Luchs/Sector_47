@@ -1,6 +1,18 @@
+require_relative "modules/Basic_module"
+
 class Grass
+  include Basic
+  attr_accessor :id_char, :_x, :_y, :_state
 
-  def initialize
+  def initialize (x: 0, y: 0)
+    Basic.population_init
+    @id_char = 'G'.freeze
+    @_x = x
+    @_y = y
+    @_state = 1
+  end
 
+  def through?
+    true
   end
 end

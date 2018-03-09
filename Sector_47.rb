@@ -17,6 +17,11 @@ class Sector_47
     @_w = width
     @_l = length
     @arr = []
+    @human  = Human.new(x: Random.rand(@_w), y: Random.rand(@_l), name: "CR-1")    # <-change entry coordinate
+    @grass  = Grass.new(x: Random.rand(@_w), y: Random.rand(@_l))                  # <-
+    @water  = Water.new                                                            #
+    @animal = Animal.new(x: Random.rand(@_w), y: Random.rand(@_l), name: "Malder") # <-
+    @tree   = Tree.new(x: Random.rand(@_w), y: Random.rand(@_l))                   # <-
 
     dirt = Dirt.new
     empty = Empty_Space.new
@@ -33,6 +38,7 @@ class Sector_47
         }
       end
     end
+
   end
 
   def to_s
@@ -43,6 +49,8 @@ class Sector_47
       puts " "
     end
     puts ">>#{@arr[1][1][1].id_char}"
+    puts ">>#{@human.id_char}"
+    Basic.info
   end
 
 end

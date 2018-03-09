@@ -31,8 +31,6 @@ module Basic
   end
 end
 
-Basic.info
-
 #--------------------------------#|
 spinner = Enumerator.new do |e|  #|
   loop do                        #|
