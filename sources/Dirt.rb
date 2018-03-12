@@ -1,12 +1,11 @@
-class Water
+class Dirt
   attr_accessor :id_char
 
   def initialize
-    @id_char = 'W'.freeze
+    @id_char = '0'.freeze
   end
 
   def through?
-    false
+    true
   end
-
 end

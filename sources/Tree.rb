@@ -1,18 +1,21 @@
-#######################################################
-##                                                   ##
-##                 UNIQUE COORDINATES <-             ## <----- In order to avoid objects located in objects
-##                                                   ##
-#######################################################
+require_relative "modules/Basic_module"
 
 class Tree
-  def initialize (x, y)
-    @x = x
-    @y = y
-    @id_char = 'T'
-    @state = 100
+  include Basic
+  attr_accessor :id_char, :_x, :_y
+
+  def initialize (x: 0, y: 0)
+    Basic.population_init
+    @id_char = 'T'.freeze
+    @_x = x
+    @_y = y
+  end
+
+  def through?
+    false
   end
 
   def to_s
-    puts "T X -> #{@x} | Y-> #{@y}"
+
   end
 end
