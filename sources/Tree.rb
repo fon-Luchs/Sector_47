@@ -9,6 +9,7 @@ class Tree
     @id_char = 'T'.freeze
     @_x = x
     @_y = y
+    @_state = 1
   end
 
   def through?
