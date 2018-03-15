@@ -34,7 +34,7 @@ end
 #--------------------------------#|
 spinner = Enumerator.new do |e|  #|
   loop do                        #|
-    for i in (0...10)            #|
+    10.times do                  #|
       e.yield '|'                #|
       e.yield '/'                #|
       e.yield '-'                #|
@@ -44,7 +44,7 @@ spinner = Enumerator.new do |e|  #|
 end                              #|---->>>> add Sector 47 to_s
                                  #|
 1.upto(19) do |i|                #|
-  printf("\r%s", spinner.next)   #|
+  print "\r%s" % spinner.next    #|
   sleep(0.3)
   printf ">DONE"                 #|
 end                              #|

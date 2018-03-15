@@ -23,5 +23,5 @@ puts "+-------------------------------------------------------------------------
 
 sector = Sector_47.new(width: 4, length: 4)
 puts sector
-sector.live 5
+sector.live 50
 puts sector
