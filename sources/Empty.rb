@@ -9,3 +9,4 @@ class Empty_Space
     true
   end
 end
+

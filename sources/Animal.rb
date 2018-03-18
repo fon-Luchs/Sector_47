@@ -18,6 +18,11 @@ class Animal
     @_name = name
   end
 
+  def change_coord (new_x, new_y)
+    @_x = new_x
+    @_y = new_y
+  end
+
   def through?
     false
   end

@@ -6,7 +6,7 @@ class Water
   end
 
   def through?
-    false
+    true
   end
 
 end

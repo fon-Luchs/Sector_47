@@ -35,28 +35,63 @@ class Sector_47
         (0...1).each {
           @_arr[l][c] << dirt
         }
-        (1..2).each {
+        (1...2).each {
           @_arr[l][c] << empty
         }
       end
 
     end
 
-    spawn (@human)
-    spawn (@grass)
-    spawn (@animal)
-    spawn (@tree)
+    spawn @water
+    spawn @tree
+    spawn @grass
+    spawn @human
+    spawn @animal
 
   end
 
-  def spawn (object) # << add variant
-    if object.id_char === 'H' ||  object.id_char === 'A'
-      @_arr[object._x][object._y][1] = object
-
-    elsif object.id_char === 'T' || object.id_char === 'G'
-      @_arr[object._x][object._y][0] = object
+  def spawn (object) # << private method | optimize
+    if object.id_char == 'W'
+      sp_water object
+    elsif object.id_char == 'G' || object.id_char == 'T'
+      sp_plants object
+    elsif object.id_char == 'H' || object.id_char == 'A'
+      sp_critters object
     end
+  end
 
+  def sp_critters (object)
+    while 1
+      if @_arr[object._x][object._y][0].through? === true
+        @_arr[object._x][object._y][1] = object
+        break
+      end
+      object.change_coord (Random.rand(@_w)), Random.rand(@_l)
+    end
+  end
+
+  def sp_plants (object)
+    while 1
+      if @_arr[object._x][object._y][0].id_char === '0'
+        @_arr[object._x][object._y][0] = object
+        break
+      end
+      object.change_coord (Random.rand(@_w)), Random.rand(@_l)
+    end
+  end
+
+  def sp_water (object)
+    (0...Core.water_size(@_w)).each do
+      while 1
+        x = Random.rand(@_w)
+        y = Random.rand(@_l)
+        if @_arr[x][y][0].id_char === '0'
+          @_arr[x][y][0] = object
+          Basic.water_chunks_init
+          break
+        end
+      end
+    end
   end
 
   def step (object)
@@ -73,26 +108,41 @@ class Sector_47
       object._x < 0 ? object._x = 1 : object._x
       object._y < 0 ? object._y = 1 : object._y
     end
-
   end
 
-  def walk (object, steps) # << add logic
-    (0...steps).each {
+  def walk (object) # << add logic
       coord  = {x: object._x, y: object._y}
-      step (object)
-      @_arr[coord[:x]][coord[:y]][1], @_arr[object._x][object._y][1] = @_arr[object._x][object._y][1], @_arr[coord[:x]][coord[:y]][1]
-    }
+      step object
+      while 1
+        if @_arr[object._x][object._y][0].through?
+          @_arr[coord[:x]][coord[:y]][1],
+          @_arr[object._x][object._y][1] = @_arr[object._x][object._y][1],
+          @_arr[coord[:x]][coord[:y]][1]
+          break
+        end
+        step object
+      end
   end
 
   def live (time)      # <<< Add Time
-    walk @human, time
+    time.times {
+      puts "---------"
+      walk @human
+      walk @animal
+      to_s
+    }
+  end
+
+  def test
+
   end
 
   def to_s
+
     (0...@_arr.size).each do |y|
         (0...@_arr[1].size).each do |x|
 
-          if @_arr[x][y][1].id_char === 'H'
+          if @_arr[x][y][1].id_char === 'H' || @_arr[x][y][1].id_char === 'A'
             print " #{@_arr[x][y][1].id_char}"
             next
           end
@@ -100,9 +150,9 @@ class Sector_47
           print " #{@_arr[x][y][0].id_char}"
         end
 
-      puts " "
+      puts ""
     end
-    Basic.info
+    #Basic.info
   end
 
 end
