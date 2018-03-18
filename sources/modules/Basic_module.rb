@@ -43,7 +43,7 @@ spinner = Enumerator.new do |e|  #|
   end                            #|
 end                              #|---->>>> add Sector 47 to_s
                                  #|
-1.upto(19) do |i|                #|
+1.upto(19) do                 #|
   print "\r%s" % spinner.next    #|
   sleep(0.3)
   printf ">DONE"                 #|

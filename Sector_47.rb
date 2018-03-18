@@ -110,8 +110,7 @@ class Sector_47
     end
   end
 
-  def walk (object, steps) # << add logic
-    (0...steps).each {
+  def walk (object) # << add logic
       coord  = {x: object._x, y: object._y}
       step object
       while 1
@@ -123,11 +122,19 @@ class Sector_47
         end
         step object
       end
-    }
   end
 
   def live (time)      # <<< Add Time
-    walk @human, time
+    time.times {
+      puts "---------"
+      walk @human
+      walk @animal
+      to_s
+    }
+  end
+
+  def test
+
   end
 
   def to_s
@@ -143,9 +150,9 @@ class Sector_47
           print " #{@_arr[x][y][0].id_char}"
         end
 
-      puts " "
+      puts ""
     end
-    Basic.info
+    #Basic.info
   end
 
 end
