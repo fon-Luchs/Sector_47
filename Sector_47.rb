@@ -25,8 +25,9 @@ class Sector_47
     @animal = Animal.new(x: Random.rand(@_w), y: Random.rand(@_l), name: "Molder") # <- <-change entry class Carnivorous < Animal
     @tree   = Tree.new(x: Random.rand(@_w), y: Random.rand(@_l))                   # <-
 
+    @empty = Empty_Space.new
+
     dirt  = Dirt.new
-    empty = Empty_Space.new
 
     (0...@_l).each do |l|
       @_arr[l] = []
@@ -36,7 +37,7 @@ class Sector_47
           @_arr[l][c] << dirt
         }
         (1...2).each {
-          @_arr[l][c] << empty
+          @_arr[l][c] << @empty
         }
       end
 
@@ -133,10 +134,6 @@ class Sector_47
     }
   end
 
-  def test
-
-  end
-
   def to_s
 
     (0...@_arr.size).each do |y|
@@ -153,6 +150,12 @@ class Sector_47
       puts ""
     end
     #Basic.info
+  end
+
+  def die (object)
+    @_arr[object._x][object._y][1] = @empty
+    object = nil
+    puts object
   end
 
 end

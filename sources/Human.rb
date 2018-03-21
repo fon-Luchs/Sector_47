@@ -12,6 +12,8 @@ class Human
     @_year = years
     @_hp   = @_year * 100
     @_name = name
+
+    ObjectSpace.define_finalizer( self, self.class.finalize(id_char, _x, _y, _name, @_year) )
   end
 
   def change_coord (new_x, new_y)
@@ -21,5 +23,9 @@ class Human
 
   def through?
     false
+  end
+
+  def self.finalize(id_char, _x, _y, _name, _year)
+    proc { puts "\t DIE \n ID_CHAR>#{id_char}\n NAME   >#{_name}\n YEARS  >#{_year}\n COORDINATE>(#{_x};#{_y})" }
   end
 end
