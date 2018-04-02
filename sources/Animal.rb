@@ -17,7 +17,7 @@ class Animal
     @_hp = @_year * 112
     @_name = name
 
-    ObjectSpace.define_finalizer( self, self.class.finalize(id_char, _x, _y, _name, @_year) )
+    # ObjectSpace.define_finalizer( self, self.class.finalize(id_char, _x, _y, _name, @_year) )
   end
 
   def change_coord (new_x, new_y)
@@ -29,8 +29,8 @@ class Animal
     false
   end
 
-  def self.finalize(id_char, _x, _y, _name, _year)
-    proc { puts "\t DIE \n ID_CHAR>#{id_char}\n NAME   >#{_name}\n YEARS  >#{_year}\n COORDINATE>(#{_x};#{_y})" }
-  end
+  # def self.finalize(id_char, _x, _y, _name, _year)
+  #   proc { puts "\t DIE \n ID_CHAR>#{id_char}\n NAME   >#{_name}\n YEARS  >#{_year}\n COORDINATE>(#{_x};#{_y})" }
+  # end
 
 end

@@ -18,6 +18,7 @@ class Sector_47
   def initialize (width:, length:)
     @_w     = width
     @_l     = length
+    Basic.get_size @_w, @_l
     @_arr   = []
     @human  = Human.new(x: Random.rand(@_w), y: Random.rand(@_l), name: "CR-1")    # <-change entry coordinate
     @grass  = Grass.new(x: Random.rand(@_w), y: Random.rand(@_l))                  # <-
@@ -63,7 +64,7 @@ class Sector_47
 
   def sp_critters (object)
     while 1
-      if @_arr[object._x][object._y][0].through? === true
+      if @_arr[object._x][object._y][0].through?
         @_arr[object._x][object._y][1] = object
         break
       end
@@ -129,8 +130,8 @@ class Sector_47
     time.times {
       puts "---------"
       walk @human
-      walk @animal
-      to_s
+      @human.memory(@_arr[@human._x][@human._y][0])
+      @human.show_memory
     }
   end
 
@@ -148,15 +149,18 @@ class Sector_47
         end
 
       puts ""
+
     end
-    #Basic.info
+    Basic.info
   end
 
-  def die (object)
-    @_arr[object._x][object._y][1] = @empty
-    object = nil
-    puts object
-  end
-
+   # def die (object)
+   #  if object.id_char == 'H' && object.id_char == 'A'
+   #    @_arr[object._x][object._y][1] = @empty
+   #    object = nil
+   #    Basic.population_decline
+   #    puts object
+   #  end
+   # end
 end
 
