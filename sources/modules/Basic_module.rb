@@ -2,9 +2,14 @@ module Basic
 
   @population   = 0
   @water_chunks = 0
-
+  @w
+  @l
   def Basic.population_init
     @population += 1
+  end
+
+  def Basic.population_decline
+    @population -= 1
   end
 
   def Basic.water_chunks_init
@@ -21,12 +26,26 @@ module Basic
     @water_chunks
   end
 
+  def Basic.get_size(w, l)
+    @w = w
+    @l = l
+  end
+
+  def Basic.get_w
+    @w
+  end
+
+  def Basic.get_l
+    @l
+  end
+
   def Basic.info
     puts"
           BASIC MODULE INFO
   >Population   -> #{@population}
   >Water_chunks -> #{@water_chunks}
-        "
+  >W            -> #{@w}
+  >L            -> #{@l}     "
 
   end
 end
@@ -43,7 +62,7 @@ spinner = Enumerator.new do |e|  #|
   end                            #|
 end                              #|---->>>> add Sector 47 to_s
                                  #|
-1.upto(19) do                 #|
+1.upto(19) do                    #|
   print "\r%s" % spinner.next    #|
   sleep(0.3)
   printf ">DONE"                 #|

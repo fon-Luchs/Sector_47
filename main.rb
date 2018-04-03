@@ -23,3 +23,4 @@ puts "+-------------------------------------------------------------------------
 
 sector = Sector_47.new(width: 4, length: 4)
 sector.live 25
+puts sector
