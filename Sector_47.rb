@@ -34,7 +34,7 @@ class Sector_47
       @_arr[l] = []
       (0...@_w).each do |c|
         @_arr[l][c] = []
-        (0...1).each {
+        (0... 1).each {
           @_arr[l][c] << dirt
         }
         (1...2).each {
@@ -52,7 +52,7 @@ class Sector_47
 
   end
 
-  def spawn (object) # << private method | optimize
+  def spawn (object) # << private method | optimize | p
     if object.id_char == 'W'
       sp_water object
     elsif object.id_char == 'G' || object.id_char == 'T'
@@ -62,7 +62,7 @@ class Sector_47
     end
   end
 
-  def sp_critters (object)
+  def sp_critters (object) # P
     while 1
       if @_arr[object._x][object._y][0].through?
         @_arr[object._x][object._y][1] = object
@@ -72,7 +72,7 @@ class Sector_47
     end
   end
 
-  def sp_plants (object)
+  def sp_plants (object) # P
     while 1
       if @_arr[object._x][object._y][0].id_char === '0'
         @_arr[object._x][object._y][0] = object
@@ -82,7 +82,7 @@ class Sector_47
     end
   end
 
-  def sp_water (object)
+  def sp_water (object) # P
     (0...Core.water_size(@_w)).each do
       while 1
         x = Random.rand(@_w)
@@ -96,10 +96,9 @@ class Sector_47
     end
   end
 
-  def step (object)
+  def step (object) # P
     symbol = Random.rand(2)
     dice   = Random.rand(2)
-
     if symbol == 0
       dice == 0 ? object._x += 1 : object._y += 1
       object._x >= @_arr.size ? object._x = (@_arr.size - 2) : object._x
@@ -112,7 +111,7 @@ class Sector_47
     end
   end
 
-  def walk (object) # << add logic
+  def walk (object) # << add logic # P
       coord  = {x: object._x, y: object._y}
       step object
       while 1
@@ -126,17 +125,37 @@ class Sector_47
       end
   end
 
+  def memory_save (object) # P
+    if @_arr[object._x][object._y][1].id_char != '*'
+      puts "(>#{object._x}<|>#{object._y}<)"
+      object.memory(@_arr[object._x][object._y][0])
+      object.show_memory
+    else
+      puts "(>#{object._x}<|>#{object._y}<) #{@_arr[object._x][object._y][1].id_char}"
+      object.memory(@_arr[object._x][object._y][1])
+      object.show_memory
+    end
+  end
+
+  def object_live (object) # P
+    walk object
+    memory_save object
+  end
+
+  private :spawn, :sp_critters, :sp_plants, :sp_water, :step, :walk, :memory_save, :object_live
+
   def live (time)      # <<< Add Time
     time.times {
       puts "---------"
-      walk @human
-      @human.memory(@_arr[@human._x][@human._y][0])
-      @human.show_memory
+      object_live @human
+      object_live @animal
+      puts "---------"
+      to_s
     }
   end
 
   def to_s
-
+  puts
     (0...@_arr.size).each do |y|
         (0...@_arr[1].size).each do |x|
 
