@@ -22,5 +22,5 @@ puts "|                                       v 0.2.1                           
 puts "+-------------------------------------------------------------------------------------+"
 
 sector = Sector_47.new(width: 4, length: 4)
-sector.live 25
-puts sector
+sector.live 1
+

@@ -5,19 +5,19 @@ require_relative "Empty"
 class Human
   include Basic
   include Core
-  attr_accessor :id_char, :_x, :_y, :_name
+  attr_accessor :id_char, :_x, :_y, :_name, :_route
 
   def initialize (x: 0, y: 0, name: "Leon", years: 1)
     Basic.population_init
     @id_char = 'H'.freeze
     @_x = x
     @_y = y
+    @_route
     @_year = years
     @_hp   = @_year * 100
     @_name = name
     @_store = []
     store_init
-    show_memory
     # ObjectSpace.define_finalizer( self, self.class.finalize(id_char, _x, _y, _name, @_year) )
   end
 
@@ -54,8 +54,8 @@ class Human
   end
 
   def memory (object)
-    @_store[@_y][@_x][0] = object
-    puts "MEMORY LOG  #{object.id_char}"
+    @_store[@_x][@_y][0] = object
+    puts "MEMORY LOG  #{object.id_char} || #{}"
   end
 
   def through?
