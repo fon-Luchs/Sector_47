@@ -8,5 +8,4 @@ class Water
   def through?
     true
   end
-
 end

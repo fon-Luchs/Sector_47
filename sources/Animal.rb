@@ -11,13 +11,14 @@ class Animal
 
   def initialize (x: 0, y: 0, name: "Maira", years: 1)
     Basic.population_init
-    @id_char = 'A'.freeze
-    @_x = x
-    @_y = y
-    @_year = years
-    @_hp = @_year * 112
-    @_name = name
+    @id_char = 'A'.freeze #<
+    @_x = x               #<
+    @_y = y               #<
+    @_year = years        #<
+    @_hp = @_year * 112   #<
+    @_name = name         #<
     @_store = []
+
     @_route
     store_init
     # ObjectSpace.define_finalizer( self, self.class.finalize(id_char, _x, _y, _name, @_year) )
