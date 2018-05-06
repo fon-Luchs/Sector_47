@@ -1,23 +1,20 @@
-require_relative "modules/Basic_module"
+require_relative "Nature"
+require_relative "Earth_Module"
 
-class Grass
-  include Basic
-  attr_accessor :id_char, :_x, :_y, :_state
-
-  def initialize (x: 0, y: 0)
-    Basic.population_init
-    @id_char = 'G'.freeze
-    @_x = x
-    @_y = y
-    @_state = 1
+class Grass < Nature
+  include Earth_Module
+  def initialize(x_cord, y_cord)
+    super
+    self.id_char = 'G'
+    add_grass self
   end
 
-  def change_coord (new_x, new_y)
-    @_x = new_x
-    @_y = new_y
+  def reproduction
+    super
+    nature_migrate if (count % 5000).zero?
   end
 
-  def through?
-    true
+  def eat_grass
+    self.count -= 1
   end
 end
