@@ -1,36 +1,25 @@
-require_relative "modules/Basic_module"
-##################
-#                #
-# =PARENT_CLASS= #
-#                #
-##################
-class Animal
-  include Basic
-  attr_accessor :id_char, :_x, :_y, :_name
+require_relative "Creatures"
+require_relative "Earth_Module"
 
-  def initialize (x: 0, y: 0, name: "Maira", years: 1)
-    Basic.population_init
-    @id_char = 'A'.freeze
-    @_x = x
-    @_y = y
-    @_year = years
-    @_hp = @_year * 112
-    @_name = name
-
-    # ObjectSpace.define_finalizer( self, self.class.finalize(id_char, _x, _y, _name, @_year) )
+class Animal < Creatures
+  include Earth_Module
+  def initialize(x_cord, y_cord, gender, year = 0)
+    super(x_cord, y_cord, gender, year)
+    self.id_char = 'A'
+    @self_multiplicity = @@animals
+    add_animal self
   end
 
-  def change_coord (new_x, new_y)
-    @_x = new_x
-    @_y = new_y
+  def hp=(hp)
+    die_from self_multiplicity if hp < 0
+    super
   end
 
-  def through?
-    false
+  def search_food
+    super
   end
 
-  # def self.finalize(id_char, _x, _y, _name, _year)
-  #   proc { puts "\t DIE \n ID_CHAR>#{id_char}\n NAME   >#{_name}\n YEARS  >#{_year}\n COORDINATE>(#{_x};#{_y})" }
-  # end
-
+  def to_s
+    super
+  end
 end

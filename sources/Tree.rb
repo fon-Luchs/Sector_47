@@ -1,27 +1,10 @@
-require_relative "modules/Basic_module"
-
-class Tree
-  include Basic
-  attr_accessor :id_char, :_x, :_y
-
-  def initialize (x: 0, y: 0)
-    Basic.population_init
-    @id_char = 'T'.freeze
-    @_x = x
-    @_y = y
-    @_state = 1
-  end
-
-  def change_coord (new_x, new_y)
-    @_x = new_x
-    @_y = new_y
-  end
-
-  def through?
-    false
-  end
-
-  def to_s
-
+require_relative "Nature"
+require_relative "Earth_Module"
+class Tree < Nature
+  include Earth_Module
+  def initialize(x_cord, y_cord)
+    super
+    self.id_char = 'T'
+    add_tree self
   end
 end
