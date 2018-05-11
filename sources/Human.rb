@@ -16,8 +16,15 @@ class Human < Creatures
   end
 
   def search_food
+
     super
   end
+
+  def day_changes
+    super
+    family_needs if year == 22
+  end
+
   def to_s
     super
   end

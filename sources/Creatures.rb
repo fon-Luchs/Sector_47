@@ -9,7 +9,7 @@ class Creatures < Core
   include Earth_Module
   extend Name_Generator
   attr_reader :name, :hp, :year, :hunger, :sprite, :gender, :family,
-              :children, :memory, :self_multiplicity
+              :children, :memory, :self_multiplicity, :day
 
   private def name=(name) ## <---
     if name == ''
@@ -39,6 +39,16 @@ class Creatures < Core
     raise"Exception family has incorrect input '#{family} < 0'" if family < 0
     raise"Exception family has incorrect input '#{family} > 100'" if family > 100
     @family = family
+  end
+
+  def day=(day)
+    day < 0 ? raise('ERROR DAY < 0') : @day = day
+  end
+
+  private def die_from(in_mass)
+    puts "#{self.class} #{name} is die"
+    in_mass.delete self
+    Earth_Module.live_count_decrement
   end
 
   def sex
@@ -164,12 +174,6 @@ class Creatures < Core
     self.sprite += 1
   end
 
-  def die_from(in_mass)
-    puts "#{name} is die"
-    in_mass.delete self
-    Earth_Module.live_count_decrement
-  end
-
   def eat(mass_elem)
     # puts "#{name} is eating"
     @hunger -= case mass_elem.id_char
@@ -205,11 +209,30 @@ class Creatures < Core
     true if sprite >= 20
   end
 
+  def time
+    self.day += 1
+    self.year += 1 if self.day == 365
+  end
+
+  def day_changes
+    starvation
+    thirst
+    time
+  end
+
+  def day_actions
+    search_food if hunger?
+    search_water if thirst?
+    search_family if family?
+    step
+  end
+
   def initialize(x_cord, y_cord, gender, year = 0, name = Creatures.name_generator, hp = Random.rand(50) + 10)
     super(x_cord, y_cord)
     self.name     = name
     self.hp       = hp
     self.id_char  = 'C'
+    self.day      = 0
     self.year     = year
     self.hunger   = 0
     self.sprite   = 0
@@ -236,7 +259,6 @@ class Creatures < Core
     end
 
   end
-
 end
 
 
