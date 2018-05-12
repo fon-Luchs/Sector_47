@@ -15,8 +15,33 @@ class Hunters < Creatures
     super
   end
 
+  def hunger?
+    true if hunger >= 10
+  end
+
+  def eat(mass_elem)
+    self_multiplicity.delete mass_elem
+    Earth_Module.live_count_decrement
+    self.hunger -= 25
+  end
+
   def search_food
+    rnd = Random.rand(4)
+    if rnd.zero?
+      super
+    else
+      (0...@@animals.size).each do |i|
+        if equals? @@animals[i]
+          eat @@animals[i]
+          break
+        end
+      end
+    end
+  end
+
+  def day_changes
     super
+    family_needs if year == 5
   end
 
   def to_s

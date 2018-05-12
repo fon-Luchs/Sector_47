@@ -9,7 +9,7 @@ class Creatures < Core
   include Earth_Module
   extend Name_Generator
   attr_reader :name, :hp, :year, :hunger, :sprite, :gender, :family,
-              :children, :memory, :self_multiplicity
+              :children, :memory, :self_multiplicity, :day
 
   private def name=(name) ## <---
     if name == ''
@@ -41,6 +41,16 @@ class Creatures < Core
     @family = family
   end
 
+  def day=(day)
+    day < 0 ? raise('ERROR DAY < 0') : @day = day
+  end
+
+  private def die_from(in_mass)
+    puts "#{self.class} #{name} is die"
+    in_mass.delete self
+    Earth_Module.live_count_decrement
+  end
+
   def sex
     'F' if gender == 'M'
     'M'
@@ -66,12 +76,12 @@ class Creatures < Core
     #   memory.clear
     #   false
     # end
-    puts 'to -> repr'
+    #puts 'to -> repr'
     reproduction object if num1 == num2
   end
 
   def search_family
-    puts "#{self.class} S_Fam"
+    #puts "#{self.class} S_Fam"
     (0...self_multiplicity.size).each do |i|
       if self_multiplicity[i].family == 100 && self_multiplicity[i].gender == sex
         break if family_offer self_multiplicity[i] # <---
@@ -108,7 +118,7 @@ class Creatures < Core
   def family_needs
     if family != 100
       rnd = Random.rand 2
-      self.family += 1 if rnd == 1
+      self.family += 10 if rnd == 1
     end
   end
 
@@ -128,7 +138,7 @@ class Creatures < Core
     year < 0 ? raise("#{year} < 0") : @year = year
   end
 
-  def hunger=(hunger) # <---
+  def hunger=(hunger)
     die_from self_multiplicity if hunger == 100
     @hunger = hunger
   end
@@ -139,11 +149,11 @@ class Creatures < Core
   end
 
   def hunger?
-    true if hunger >= 25
+    true if hunger >= 10
   end
 
   def starvation
-    self.hunger += 1
+    self.hunger += 5
   end
 
   def equals?(object)
@@ -164,20 +174,13 @@ class Creatures < Core
     self.sprite += 1
   end
 
-  def die_from(in_mass)
-    puts "#{name} is die"
-    in_mass.delete self
-    Earth_Module.live_count_decrement
-  end
-
   def eat(mass_elem)
     # puts "#{name} is eating"
-    @hunger -= case mass_elem.id_char
-               when 'G'
+    @hunger -= if mass_elem.id_char == 'G'
                  mass_elem.eat_grass
-                 10
+                 15
                else
-                 25
+                 0
                end
   end
 
@@ -205,11 +208,31 @@ class Creatures < Core
     true if sprite >= 20
   end
 
+  def time
+    self.day += 1
+    self.year += 1 if self.day == 365
+  end
+
+  def day_changes
+    starvation
+    thirst
+    family_needs
+    time
+  end
+
+  def day_actions
+    search_food if hunger?
+    search_water if thirst?
+    search_family if family?
+    step
+  end
+
   def initialize(x_cord, y_cord, gender, year = 0, name = Creatures.name_generator, hp = Random.rand(50) + 10)
     super(x_cord, y_cord)
     self.name     = name
     self.hp       = hp
     self.id_char  = 'C'
+    self.day      = 0
     self.year     = year
     self.hunger   = 0
     self.sprite   = 0
@@ -236,7 +259,6 @@ class Creatures < Core
     end
 
   end
-
 end
 
 

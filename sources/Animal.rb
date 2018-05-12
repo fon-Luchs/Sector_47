@@ -19,6 +19,11 @@ class Animal < Creatures
     super
   end
 
+  def day_changes
+    super
+    family_needs if year == 3
+  end
+
   def to_s
     super
   end
