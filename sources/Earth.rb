@@ -11,11 +11,11 @@ class Earth
   end
 
   private def creatures_init
-    create Human, 20, 22
-    create Animal, 400, 3
-    create Hunters, 20, 5
-    5000.times { Grass.new Random.rand(cord_max), Random.rand(cord_max) }
-    3000.times { Water.new Random.rand(cord_max), Random.rand(cord_max) }
+    create Human, 100, 22
+    create Animal, 100, 3
+    create Hunters, 5, 5
+    6000.times { Grass.new Random.rand(cord_max), Random.rand(cord_max) }
+    4000.times { Water.new Random.rand(cord_max), Random.rand(cord_max) }
   end
 
   def nature_reproduction(mass)

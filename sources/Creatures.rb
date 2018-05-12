@@ -76,12 +76,12 @@ class Creatures < Core
     #   memory.clear
     #   false
     # end
-    puts 'to -> repr'
+    #puts 'to -> repr'
     reproduction object if num1 == num2
   end
 
   def search_family
-    puts "#{self.class} S_Fam"
+    #puts "#{self.class} S_Fam"
     (0...self_multiplicity.size).each do |i|
       if self_multiplicity[i].family == 100 && self_multiplicity[i].gender == sex
         break if family_offer self_multiplicity[i] # <---
@@ -118,7 +118,7 @@ class Creatures < Core
   def family_needs
     if family != 100
       rnd = Random.rand 2
-      self.family += 1 if rnd == 1
+      self.family += 10 if rnd == 1
     end
   end
 
@@ -138,7 +138,7 @@ class Creatures < Core
     year < 0 ? raise("#{year} < 0") : @year = year
   end
 
-  def hunger=(hunger) # <---
+  def hunger=(hunger)
     die_from self_multiplicity if hunger == 100
     @hunger = hunger
   end
@@ -149,11 +149,11 @@ class Creatures < Core
   end
 
   def hunger?
-    true if hunger >= 25
+    true if hunger >= 10
   end
 
   def starvation
-    self.hunger += 1
+    self.hunger += 5
   end
 
   def equals?(object)
@@ -176,12 +176,11 @@ class Creatures < Core
 
   def eat(mass_elem)
     # puts "#{name} is eating"
-    @hunger -= case mass_elem.id_char
-               when 'G'
+    @hunger -= if mass_elem.id_char == 'G'
                  mass_elem.eat_grass
-                 10
+                 15
                else
-                 25
+                 0
                end
   end
 
@@ -217,6 +216,7 @@ class Creatures < Core
   def day_changes
     starvation
     thirst
+    family_needs
     time
   end
 
