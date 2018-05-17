@@ -16,7 +16,7 @@ def welcome(version)
   puts "**************************************>#{version}<**************************************"
 end
 
-welcome '0.8.3'
+welcome '0.8.5'
 
 arlegan = Sector_47.new 100, 100
 

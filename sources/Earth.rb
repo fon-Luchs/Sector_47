@@ -5,15 +5,15 @@ class Earth
   include Earth_Module
   include Core_Module
 
-  def create(class_, count, years = 0)
+  private def create(class_, count, years = 0)
     count.times { class_.new Random.rand(cord_max), Random.rand(cord_max), 'M', years}
     count.times { class_.new Random.rand(cord_max), Random.rand(cord_max), 'F', years}
   end
 
   private def creatures_init
-    create Human, 100, 22
-    create Animal, 100, 3
-    create Hunters, 5, 5
+    create Human, 15, 22
+    create Animal, 120, 3
+    create Hunters, 15, 5
     6000.times { Grass.new Random.rand(cord_max), Random.rand(cord_max) }
     4000.times { Water.new Random.rand(cord_max), Random.rand(cord_max) }
   end

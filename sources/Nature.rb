@@ -20,18 +20,16 @@ class Nature < Core
   end
 
   def reproduction
-    self.count += 1
+    rnd = Random.rand(11)
+    self.count += 1 if rnd == 1
   end
 
   def nature_migrate
-    puts "OLD #{x_cord} || #{y_cord}"
     random_change_cord
-    puts "NEW #{x_cord} || #{y_cord}"
     self.class.new x_cord, y_cord
   end
 
   def die
-    puts "Grass is die"
     Earth_Module.nature_count_decrement
     @@grasses.delete self
   end

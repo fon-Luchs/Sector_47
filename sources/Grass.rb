@@ -11,7 +11,7 @@ class Grass < Nature
 
   def reproduction
     super
-    nature_migrate if (count % 5000).zero?
+    nature_migrate if (count % 1000).zero?
   end
 
   def eat_grass

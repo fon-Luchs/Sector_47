@@ -26,17 +26,13 @@ class Hunters < Creatures
   end
 
   def search_food
-    rnd = Random.rand(4)
-    if rnd.zero?
-      super
-    else
-      (0...@@animals.size).each do |i|
-        if equals? @@animals[i]
-          eat @@animals[i]
-          break
-        end
+    (0...@@animals.size).each do |i|
+      if equals? @@animals[i]
+        eat @@animals[i]
+        break
       end
     end
+    super if hunger?
   end
 
   def day_changes

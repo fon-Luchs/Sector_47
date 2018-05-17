@@ -57,8 +57,8 @@ class Creatures < Core
   end
 
   def family_offer(object)
-    num1 = Random.rand(11)
-    num2 = Random.rand(11)
+    num1 = Random.rand(16)
+    num2 = Random.rand(16)
     # if num1 + num2 != 10
     #   puts'FIRST'
     #   sweetheart object
@@ -81,7 +81,6 @@ class Creatures < Core
   end
 
   def search_family
-    #puts "#{self.class} S_Fam"
     (0...self_multiplicity.size).each do |i|
       if self_multiplicity[i].family == 100 && self_multiplicity[i].gender == sex
         break if family_offer self_multiplicity[i] # <---
@@ -104,7 +103,6 @@ class Creatures < Core
   end
 
   def reproduction(object)
-    # puts 'Start repr'
     gdr = if Random.rand(2).zero?
             'F'
           else
@@ -118,7 +116,7 @@ class Creatures < Core
   def family_needs
     if family != 100
       rnd = Random.rand 2
-      self.family += 10 if rnd == 1
+      self.family += 2 if rnd == 1
     end
   end
 
@@ -171,7 +169,7 @@ class Creatures < Core
   end
 
   def thirst
-    self.sprite += 1
+    self.sprite += 5
   end
 
   def eat(mass_elem)

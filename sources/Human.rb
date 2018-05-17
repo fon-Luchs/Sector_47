@@ -16,7 +16,21 @@ class Human < Creatures
   end
 
   def search_food
-
+    if @@animals.size > @@grasses.size
+      (0...@@animals.size).each do |i|
+        if equals? @@animals[i]
+          eat @@animals[i]
+          break
+        end
+      end
+    elsif @@hunters.size > @@grasses.size
+      0...@@hunters.size.each do |i|
+        if equals? @@hunters[i]
+          eat @@hunters[i]
+          break
+        end
+      end
+    end
     super
   end
 
