@@ -12,11 +12,13 @@ module Name_Generator
 
   def name
     @named = ''
-    2.times do
+    4.times do
+      @named << @@rc.sample
+      @named << @@ra.sample
       @named << @@rc.sample
       @named << @@ra.sample
     end
-    @named << rand(0..999).to_s
+    # @named << rand(0..999).to_s
     save_name
     check_name
   end

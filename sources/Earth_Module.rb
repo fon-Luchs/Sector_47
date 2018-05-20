@@ -10,6 +10,7 @@ module Earth_Module
 
   @@live_count = 0
   @@nature_count = 0
+
   def add_animal(object)
     object.id_char == 'A' ? @@animals.push(object) : raise("#{object} is not animal")
   end
@@ -52,10 +53,16 @@ module Earth_Module
       @@nature_count -= 1
     end
 
+    def animals_count_increment
+      @@animals_size += 1
+    end
+
     def output_mass(mass_object)
       if mass_object.class == Array
-        print "#{mass_object[0].class} "
-        (0...mass_object.size).each { |i| print "#{i + 1} " }
+        (0...mass_object.size).each do |i|
+          print "#{mass_object[0].class}>"
+          print "#{i + 1}\r"
+        end
         puts
       else
         raise "#{mass_object} is not array"
@@ -72,8 +79,9 @@ module Earth_Module
     end
 
     def output_live_count_increment
-      puts "#{'^' * 37}"
-      print "C> #{@@live_count} | N> #{@@nature_count}"
+      print "C> #{@@live_count} | N> #{@@nature_count}\n"
+      output
+      puts '^' * 30
       puts
     end
 

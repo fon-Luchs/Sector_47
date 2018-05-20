@@ -16,12 +16,11 @@ class Hunters < Creatures
   end
 
   def hunger?
-    true if hunger >= 10
+    true if hunger >= 5
   end
 
   def eat(mass_elem)
     self_multiplicity.delete mass_elem
-    Earth_Module.live_count_decrement
     self.hunger -= 25
   end
 
@@ -33,6 +32,18 @@ class Hunters < Creatures
       end
     end
     super if hunger?
+  end
+
+  def family_offer(object)
+    num1 = Random.rand(11)
+    num2 = Random.rand(11)
+    reproduction object if num1 == num2
+  end
+
+  def family_needs
+    if family != 100
+      self.family += 1
+    end
   end
 
   def day_changes

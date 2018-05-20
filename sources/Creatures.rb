@@ -46,7 +46,7 @@ class Creatures < Core
   end
 
   private def die_from(in_mass)
-    puts "#{self.class} #{name} is die"
+    # puts "#{self.class} #{name} is die"
     in_mass.delete self
     Earth_Module.live_count_decrement
   end
@@ -178,7 +178,7 @@ class Creatures < Core
                  mass_elem.eat_grass
                  15
                else
-                 0
+                 25
                end
   end
 

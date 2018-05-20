@@ -11,9 +11,9 @@ class Earth
   end
 
   private def creatures_init
-    create Human, 15, 22
-    create Animal, 120, 3
-    create Hunters, 15, 5
+    create Human, 40, 22
+    create Animal, 40, 3
+    create Hunters, 30, 5
     6000.times { Grass.new Random.rand(cord_max), Random.rand(cord_max) }
     4000.times { Water.new Random.rand(cord_max), Random.rand(cord_max) }
   end
@@ -40,7 +40,7 @@ class Earth
 
   def changes
     creatures_changes @@hunters
-    creatures_changes @@hunters
+    creatures_changes @@humans
     creatures_changes @@animals
     nature_reproduction @@grasses
   end

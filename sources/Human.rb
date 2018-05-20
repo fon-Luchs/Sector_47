@@ -15,16 +15,21 @@ class Human < Creatures
     super
   end
 
+  def eat(mass_elem)
+    self_multiplicity.delete mass_elem
+    self.hunger -= 25
+  end
+
   def search_food
-    if @@animals.size > @@grasses.size
+    if @@animals.size > (@@grasses.size / 2)
       (0...@@animals.size).each do |i|
         if equals? @@animals[i]
           eat @@animals[i]
           break
         end
       end
-    elsif @@hunters.size > @@grasses.size
-      0...@@hunters.size.each do |i|
+    elsif @@hunters.size > (@@animals.size / 2)
+      (0...@@hunters.size).each do |i|
         if equals? @@hunters[i]
           eat @@hunters[i]
           break
