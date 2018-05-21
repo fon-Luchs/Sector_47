@@ -9,7 +9,7 @@ class Creatures < Core
   include Earth_Module
   extend Name_Generator
   attr_reader :name, :hp, :year, :hunger, :sprite, :gender, :family,
-              :children, :memory, :self_multiplicity, :day
+              :self_multiplicity, :day
 
   private def name=(name) ## <---
     if name == ''
@@ -27,12 +27,14 @@ class Creatures < Core
   end
 
   private def gender=(gender)
-    gender == 'M' || gender == 'F' ? @gender = gender : raise("gender#{gender}")
-  end
-
-  def memory=(memory)
-    raise"#{memory} is't hash" if memory.class != Hash
-    @memory = memory
+    @gender = case gender
+              when 'M'
+                'M'
+              when 'F'
+                'F'
+              else
+                raise "exception #{gender}"
+              end
   end
 
   def family=(family)
@@ -46,7 +48,6 @@ class Creatures < Core
   end
 
   private def die_from(in_mass)
-    puts "#{self.class} #{name} is die"
     in_mass.delete self
     Earth_Module.live_count_decrement
   end
@@ -59,29 +60,10 @@ class Creatures < Core
   def family_offer(object)
     num1 = Random.rand(11)
     num2 = Random.rand(11)
-    # if num1 + num2 != 10
-    #   puts'FIRST'
-    #   sweetheart object
-    #   object.sweetheart self
-    #   true
-    # end
-    # if num1 == num2
-    #   puts'SECOND'
-    #   sweetheart object, true
-    #   object.sweetheart self, true
-    #   true
-    # end
-    # if num1 + num2 == 10
-    #   puts'333'
-    #   memory.clear
-    #   false
-    # end
-    #puts 'to -> repr'
     reproduction object if num1 == num2
   end
 
   def search_family
-    #puts "#{self.class} S_Fam"
     (0...self_multiplicity.size).each do |i|
       if self_multiplicity[i].family == 100 && self_multiplicity[i].gender == sex
         break if family_offer self_multiplicity[i] # <---
@@ -89,29 +71,13 @@ class Creatures < Core
     end
   end
 
-  def family_life
-    rnd = Random.rand(5)
-    self.children += 1 if rnd == 2
-  end
-
-  def sweetheart_live
-    step
-    unless equals? memory[:sweetheart]
-      memory[:sweetheart].x_cord = x_cord
-      memory[:sweetheart].y_cord = y_cord
-    end
-    family_offer memory[:sweetheart]
-  end
-
   def reproduction(object)
-    # puts 'Start repr'
     gdr = if Random.rand(2).zero?
             'F'
           else
             'M'
           end
-    self.class.new object.x_cord, object.y_cord, gdr if object.gender == 'F'
-    self.class.new x_cord, y_cord, gdr
+    self.class.new object.x_cord, object.y_cord, gdr
     self.family = 0
   end
 
@@ -124,10 +90,6 @@ class Creatures < Core
 
   def family?
     true if family == 100
-  end
-
-  def sweetheart(object, family = false)
-    family ? memory[:family] = object : memory[:sweetheart] = object
   end
 
   def hp=(hp)
@@ -171,16 +133,15 @@ class Creatures < Core
   end
 
   def thirst
-    self.sprite += 1
+    self.sprite += 5
   end
 
   def eat(mass_elem)
-    # puts "#{name} is eating"
     @hunger -= if mass_elem.id_char == 'G'
-                 mass_elem.eat_grass
+                 mass_elem.eat
                  15
                else
-                 0
+                 25
                end
   end
 
@@ -194,7 +155,6 @@ class Creatures < Core
   end
 
   def drink
-    # puts "#{name} is Drink"
     @sprite -= 10
   end
 
@@ -237,7 +197,6 @@ class Creatures < Core
     self.hunger   = 0
     self.sprite   = 0
     self.gender   = gender
-    self.memory   = {}
     self.family   = 0
     @self_multiplicity = []
     Earth_Module.live_count_increment
@@ -248,7 +207,7 @@ class Creatures < Core
     puts "ID: #{object_id}\nID_CHAR: #{id_char}"
     puts "NAME: #{name}\nYEAR: #{year}"
     puts "STATE: #{hp}\n(X: #{x_cord} | Y: #{y_cord})"
-    puts "GENDER: #{gender}\nFAMILY: #{family}"
+    puts "GENDER: #{gender}\n"
     puts "SPRITE: #{sprite}\nHUNGER: #{hunger}"
   end
 
@@ -260,5 +219,3 @@ class Creatures < Core
 
   end
 end
-
-
