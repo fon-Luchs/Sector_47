@@ -12,11 +12,16 @@ class Nature < Core
     end
   end
 
-  def initialize(x_cord, y_cord)
+  def initialize(x_cord, y_cord, count = 1)
     super(x_cord, y_cord)
     self.id_char = 'N'
-    self.count = 1
+    self.count = count
+    @self_multiplicity = []
     Earth_Module.nature_count_increment
+  end
+
+  def eat
+    self.count -= 1
   end
 
   def reproduction

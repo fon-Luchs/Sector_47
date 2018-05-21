@@ -15,6 +15,22 @@ class Animal < Creatures
     super
   end
 
+  def hunger?
+    super
+  end
+
+  def thirst?
+    true if sprite >= 5
+  end
+
+  def starvation
+    super
+  end
+
+  def thirst
+    super
+  end
+
   def search_food
     super
   end
@@ -22,6 +38,19 @@ class Animal < Creatures
   def day_changes
     super
     family_needs if year == 3
+  end
+
+  def family_offer(object)
+    num1 = Random.rand 6
+    num2 = Random.rand 6
+    reproduction object if num1 == num2
+  end
+
+  def family_needs
+    rnd = Random.rand 2
+    if family != 100
+      self.family += 2 if rnd.zero?
+    end
   end
 
   def to_s
